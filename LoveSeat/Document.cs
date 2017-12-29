@@ -160,10 +160,12 @@ namespace LoveSeat
 
         public void AddAttachment(string filename, byte[] data)
         {
-            var jobj = jObject.GetValue("_attachments") as JObject ?? new JObject();
-            jobj[filename] = new JObject();
-            jobj[filename]["data"] = Convert.ToBase64String(data);
-            jObject["_attachments"] = jobj;
+            new AttachmentsBuilder(this.jObject, filename).Data(data).Build();
+        }
+
+        public void AddAttachment(string filename, byte[] data, string contentType)
+        {
+            new AttachmentsBuilder(this.jObject, filename).Data(data).ContentType(contentType).Build();
         }
 
         public IEnumerable<string> GetAttachmentNames()
@@ -173,5 +175,40 @@ namespace LoveSeat
             return attachment.Select(x => x.Value<JProperty>().Name);
         }
 
+        private class AttachmentsBuilder
+        {
+            private JObject jObject;
+            private JObject attachments;
+            private string filename;
+            public AttachmentsBuilder(JObject doc, String filename)
+            {                
+                this.jObject = doc;
+                attachments = jObject.GetValue("_attachments") as JObject ?? new JObject();
+                this.Filename(filename);
+            }
+            
+            public AttachmentsBuilder Data(byte[] data)
+            {
+                attachments[filename]["data"] = Convert.ToBase64String(data);
+                return this;
+            }
+            public AttachmentsBuilder ContentType(string contentType)
+            {
+                attachments[filename]["content_type"] = contentType;
+                return this;
+            }
+
+            public void Build()
+            {
+                jObject["_attachments"] = attachments;
+            }
+
+            private AttachmentsBuilder Filename(string filename)
+            {
+                this.filename = filename;
+                attachments[filename] = new JObject();
+                return this;
+            }
+        }
     }
 }

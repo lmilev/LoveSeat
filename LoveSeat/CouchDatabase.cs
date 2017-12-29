@@ -566,6 +566,161 @@ namespace LoveSeat
             }
         }
 
+        CouchResponseObject IDocumentDatabase.CreateDocument(string id, string jsonForDocument)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.CreateDocument<T>(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.CreateDocument(string jsonForDocument)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.DeleteDocument(string id, string rev)
+        {
+            throw new NotImplementedException();
+        }
+
+        Document IDocumentDatabase.GetDocument(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Document<T> IDocumentDatabase.GetDocument<T>(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.AddAttachment(string id, byte[] attachment, string filename, string contentType)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.AddAttachment(string id, string rev, byte[] attachment, string filename, string contentType)
+        {
+            throw new NotImplementedException();
+        }
+
+        Stream IDocumentDatabase.GetAttachmentStream(Document doc, string attachmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        Stream IDocumentDatabase.GetAttachmentStream(string docId, string rev, string attachmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        Stream IDocumentDatabase.GetAttachmentStream(string docId, string attachmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.DeleteAttachment(string id, string rev, string attachmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.DeleteAttachment(string id, string attachmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        CouchResponseObject IDocumentDatabase.SaveDocument(Document document)
+        {
+            throw new NotImplementedException();
+        }
+
+        BulkDocumentResponses IDocumentDatabase.SaveDocuments(Documents docs, bool all_or_nothing)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult<T> IDocumentDatabase.View<T>(string viewName, string designDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult<T> IDocumentDatabase.View<T>(string viewName, ViewOptions options, string designDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult IDocumentDatabase.GetAllDocuments()
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult IDocumentDatabase.GetAllDocuments(ViewOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult<T> IDocumentDatabase.View<T>(string viewName)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult<T> IDocumentDatabase.View<T>(string viewName, ViewOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        Document<T> IDocumentDatabase.GetDocument<T>(Guid id, IObjectSerializer objectSerializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        Document<T> IDocumentDatabase.GetDocument<T>(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDocumentDatabase.Show(string showName, string docId)
+        {
+            throw new NotImplementedException();
+        }
+
+        IListResult IDocumentDatabase.List(string listName, string viewName, ViewOptions options, string designDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        IListResult IDocumentDatabase.List(string listName, string viewName, ViewOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult IDocumentDatabase.View(string viewName, ViewOptions options, string designDoc)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult IDocumentDatabase.View(string viewName, ViewOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        ViewResult IDocumentDatabase.View(string viewName)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDocumentDatabase.SetTimeout(int timeoutMs)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDocumentDatabase.SetDefaultDesignDoc(string designDoc)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 
