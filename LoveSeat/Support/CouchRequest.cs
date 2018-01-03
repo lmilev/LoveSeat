@@ -83,6 +83,12 @@ namespace LoveSeat.Support
             return this;
         }
 
+        public CouchRequest Head()
+        {
+            request.Method = "HEAD";
+            return this;
+        }
+
         public CouchRequest Get()
         {
             request.Method = "GET";

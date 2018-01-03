@@ -158,6 +158,11 @@ namespace LoveSeat
             get { return jObject["_attachments"] != null; }
         }
 
+        public void AddAttachment(String filename, JToken existingToken)
+        {
+            new AttachmentsBuilder(this.jObject, filename).Content(existingToken).Build();
+        }
+
         public void AddAttachment(string filename, byte[] data)
         {
             new AttachmentsBuilder(this.jObject, filename).Data(data).Build();
@@ -195,6 +200,12 @@ namespace LoveSeat
             public AttachmentsBuilder ContentType(string contentType)
             {
                 attachments[filename]["content_type"] = contentType;
+                return this;
+            }
+
+            public AttachmentsBuilder Content(JToken readyToken)
+            {
+                attachments[filename] = readyToken;
                 return this;
             }
 

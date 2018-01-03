@@ -168,6 +168,20 @@ namespace LoveSeat
         {
             return GetDocument<T>(id, false);
         }
+        public bool ExistsDocument(String id)
+        {
+            var resp = GetRequest(String.Format("{0}/{1}", databaseBaseUri, id))
+                .Head().Json().GetCouchResponse();
+            switch(resp.StatusCode)
+            {
+                case HttpStatusCode.NotFound:
+                    return false;
+                case HttpStatusCode.OK:
+                    return true;
+            }
+
+            throw new InvalidOperationException(resp.StatusCode + " " + resp.ResponseString);
+        }
         public Document GetDocument(string id, bool attachments)
         {
             var resp = GetRequest(String.Format("{0}/{1}{2}", databaseBaseUri, id, attachments ? "?attachments=true" : string.Empty))
@@ -315,12 +329,14 @@ namespace LoveSeat
         }
         public CouchResponseObject DeleteAttachment(string id, string rev, string attachmentName)
         {
-            return GetRequest(string.Format("{0}/{1}/{2}?rev={3}", databaseBaseUri, id, attachmentName, rev)).Json().Delete().GetCouchResponse().GetJObject();
+            String encodedAttachmentName = HttpUtility.UrlEncode(attachmentName);
+            return GetRequest(string.Format("{0}/{1}/{2}?rev={3}", databaseBaseUri, id, encodedAttachmentName, rev)).Json().Delete().GetCouchResponse().GetJObject();
         }
         public CouchResponseObject DeleteAttachment(string id, string attachmentName)
         {
+            String encodedAttachmentName = HttpUtility.UrlEncode(attachmentName);
             var doc = GetDocument(id);
-            return DeleteAttachment(doc.Id, doc.Rev, attachmentName);
+            return DeleteAttachment(doc.Id, doc.Rev, encodedAttachmentName);
         }
 
         public CouchResponseObject SaveDocument(Document document)
